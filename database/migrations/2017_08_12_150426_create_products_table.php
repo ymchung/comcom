@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->float('originalprice')->unsigned();
             $table->float('comcomprice')->unsigned();
             $table->text('description');
-            $table->text('image')->nullable();
+            $table->string('image')->nullable();
             $table->text('slug')->nullable();
             $table->integer('minimumreservation');
             $table->string('duration');

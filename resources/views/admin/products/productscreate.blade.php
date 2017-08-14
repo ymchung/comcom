@@ -40,7 +40,8 @@
                     <label for="">Fecha de finalización</label>
                     <input type="date" name="duration" value=""><br>
 
-                    <label for="">Imagen</label><br>
+                    <label for="">Imagen</label>
+                    <input type="file" name="image" value=""> <br>
 
                     <button class="btn btn-sm btn-primary" type="submit" name="" value="">Publicar</button>
 

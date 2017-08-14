@@ -19,6 +19,8 @@ Auth::routes();
 
 Route::get('/myaccount', 'HomeController@index')->name('myaccount');
 
+Route::get('/products' , 'SitesController@products')->name('products');
+
     Route::post('/products/create', 'ProductController@store');
 
 Route::group(['prefix' => 'admin'], function(){

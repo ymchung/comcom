@@ -37,7 +37,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         <li><a href="#">Inicio</a></li>
-                        <li><a href="#">Productos</a></li>
+                        <li><a href="{{ route('products') }}">Productos</a></li>
                         <li><a href="#">FAQs</a></li>
                         <li><a href="#">Contacto</a></li>
                     </ul>
