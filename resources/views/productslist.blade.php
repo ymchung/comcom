@@ -21,6 +21,10 @@
         {{ $product->priceText() . $product->comcomprice }}
       </div>
 
+      <div class="">
+        <button type="btn btn-sm" name="button"><a href="#">Reservar</a></button>
+      </div>
+
     </article>
   @endforeach
 
