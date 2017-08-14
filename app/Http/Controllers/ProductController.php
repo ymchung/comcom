@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\User;
 use App\Product;
 use App\Category;
+use App\Http\Requests\ProductCreateRequest;
+use App\Http\Controllers\Auth;
 
 class ProductController extends Controller
 {
@@ -16,7 +20,7 @@ class ProductController extends Controller
     public function index()
     {
       $products = Product::with('category')->paginate(10);
-      return view('admin.products',compact('products'));
+      return view('admin.products.products',compact('products'));
     }
 
 
@@ -27,7 +31,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.productscreate');
+      $categories = Category::all();
+      return view('admin.products.productscreate', compact('categories'));
     }
 
     /**
@@ -36,8 +41,10 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductCreateRequest $request)
     {
+      \Auth::user()->products()->create($request->all());
+      return redirect('admin/products');
 
     }
 
@@ -49,8 +56,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-      $product = Product::findOrFail($id);
-      return view('productshow', compact('product'));
+      // $product = Product::findOrFail($id);
+      // return view('productshow', compact('product'));
     }
 
     /**
@@ -62,7 +69,8 @@ class ProductController extends Controller
     public function edit($id)
     {
       $product = Product::findOrFail($id);
-      return view('admin.productsedit', compact('product'));
+      $categories = Category::all();
+      return view('admin.products.productsedit', compact('product', 'categories'));
     }
 
     /**
@@ -72,9 +80,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductCreateRequest $request, $id)
     {
-        //
+      $product = Product::findOrFail($id);
+      $product->update($request->all());
     }
 
     /**

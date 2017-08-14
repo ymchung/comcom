@@ -8,16 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
   protected $guarded = [];
-  public function getPriceAttribute($value)
-  {
-      return $value / 100;
+
+
+  public function priceText() {
+      return '$' . $this->price;
   }
-  public function priceText()
-  {
-      return $this->price . ' $';
+
+  public function category() {
+    return $this->belongsTo(Category::class);
   }
-  public function category()
-  {
+
+  public function user() {
     return $this->belongsTo(Category::class);
   }
 }

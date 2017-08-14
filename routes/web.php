@@ -19,9 +19,13 @@ Auth::routes();
 
 Route::get('/myaccount', 'HomeController@index')->name('myaccount');
 
+    Route::post('/products/create', 'ProductController@store');
 
-Route::group(['middleware'=>'role:admin'], function() {
-  Route::resource('/admin', 'RoleController');
-  Route::resource('/products', 'ProductController');
-  Route::resource('/users', 'UserController');
+Route::group(['prefix' => 'admin'], function(){
+  Route::group(['middleware'=>'role:admin'], function() {
+    Route::resource('/', 'RoleController');
+    Route::resource('/users', 'UserController');
+    Route::resource('/products', 'ProductController');
+    Route::post('/products/create', 'ProductController@store');
+  });
 });

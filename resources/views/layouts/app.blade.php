@@ -57,7 +57,7 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
                                       @if (auth()->user()->role === 'admin')
-                                      <a href="{{ route('admin.index') }}">
+                                      <a href="{{ route('index') }}">
                                           Panel administrador
                                       </a>
                                       @else

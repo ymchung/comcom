@@ -16,15 +16,15 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->integer('originalprice')->unsigned();
-            $table->integer('comcomprice')->unsigned();
+            $table->float('originalprice')->unsigned();
+            $table->float('comcomprice')->unsigned();
             $table->text('description');
-            $table->text('image');
-            $table->text('slug');
+            $table->text('image')->nullable();
+            $table->text('slug')->nullable();
             $table->integer('minimumreservation');
-            $table->integer('duration');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('duration');
+            $table->integer('user_id')->unsigned()->index(); //sin signo y del tipo index.
+             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
