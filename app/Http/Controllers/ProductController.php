@@ -46,7 +46,7 @@ class ProductController extends Controller
       $file = $request->file('image');
       $ext = $file->extension();
       $name = uniqid();
-      $path = $file->storeAs('products'.$request->id, $name.'.'.$ext);
+      $path = $file->storeAs('images'.$request->id, $name.'.'.$ext);
 
       $upload = [
         'title' => $request->input('title'),
