@@ -15,6 +15,7 @@ class SitesController extends Controller
 {
     public function products() {
       $products = Product::all();
-      return view('productslist', compact('products'));
+      $categories = Category::all();
+      return view('productslist', compact('products', 'categories'));
     }
 }
