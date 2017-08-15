@@ -1,31 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-3 col-md-offset-0">
-            <div class="panel panel-default">
-                <div class="panel-heading">Menú administrador</div>
+<div class="panel-container">
+  <div class="panel-title">
+    <p>Menú administrador</p>
+  </div>
 
-                <div class="panel-body">
-                    <ul>
-                      <li><a href="{{ route('users.index') }}">Usuarios</a></li>
-                      <li><a href="{{ route('products.index') }}">Productos</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+    <ul class="panel-blocks">
+      <div class="block">
+        <a href="{{ route('users.index') }}"><li>Lista de usuarios</li></a>
+      </div>
+      <div class="block">
+        <a href="{{ route('products.index') }}"><li>Lista de productos</li></a>
+      </div>
 
-        {{-- <div class="col-md-9">
-          <div class="panel panel-default">
-            <div class="panel-heading"></div>
-          </div>
-          <div class="panel-body"> --}}
-            @yield('subcontent-admin')
-          {{-- </div>
-        </div> --}}
+    </ul>
 
-
-    </div>
 </div>
+
+<br>
+<br>
+<br>
+
 @endsection

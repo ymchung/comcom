@@ -8,83 +8,128 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('pageTitle', 'ComCom')</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
+
+  	{{-- <link rel="icon" type="images/png" sizes "66 x 47" href="images/icono.png"> --}}
+  	<link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  	<link rel="stylesheet" id="cssArchivo" href="css/style.css">
+
 </head>
+
 <body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
+  <div class="container-index">
+  <header>
+      <div class="header-container">
+        <div class="header-subcontainer">
+          <div id=logo>
+              <a href="{{ url('/') }}"><img src="storage/images/logo-comcom.png" alt="logo"></a>
+          </div>
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
+          <!-- Right Side Of Navbar -->
+          <ul class="navbar-right">
+          <!-- Authentication Links -->
+              @if (Auth::guest())
+                <div class="login-button">
+                  <li><a href="{{ route('login') }}">INGRESAR</a></li>
                 </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        <li><a href="#">Inicio</a></li>
-                        <li><a href="{{ route('products') }}">Productos</a></li>
-                        <li><a href="#">FAQs</a></li>
-                        <li><a href="#">Contacto</a></li>
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                      @if (auth()->user()->role === 'admin')
-                                      <a href="{{ route('products.index') }}">
-                                          Panel administrador
-                                      </a>
-                                      @else
-                                      <a href="{{ route('myaccount') }}">
-                                          Mi cuenta
-                                      </a>
-                                      @endif
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
+                <div class="signup-button">
+                  <li><a href="{{ route('register') }}">REGISTRATE</a></li>
                 </div>
-            </div>
-        </nav>
+              @else
+              <li>
+                <input class="menu-open" type="checkbox" id="menu-event">
 
-        @yield('content')
-    </div>
+                  <label class="menu-open" for="menu-event">
+                    <p>{{ Auth::user()->name }}</p>
+                  </label>
+
+                </input>
+
+                <nav class="dropdown-menu">
+                  <ul class="dropdown-container">
+                    <li>
+                    @if (auth()->user()->role === 'admin')
+                      <a href="{{ route('index') }}"> Panel administrador </a>
+                    @else
+                      <a href="{{ route('myaccount') }}"> Mi cuenta </a>
+                    @endif
+                    </li>
+
+                    <li><a href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();"> Logout </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                          {{ csrf_field() }}
+                        </form>
+                    </li>
+                  </ul>
+                </nav>
+              </li>
+              @endif
+            </li>
+            </ul>
+        </div>
+
+
+          <!-- header menu	 -->
+          <input class="nav-open" type="checkbox" id="header-event">
+
+            <label class="nav-open" for="header-event">
+                  <i class="ion-navicon-round"></i>
+            </label>
+          </input>
+
+          <nav class="nav-header">
+              <ul>
+                  <li><a href="{{ url('/') }}">Home</a></li>
+                  <li><a href="{{ route('products') }}">Productos</a></li>
+                  <li><a href="{{ url('faqs') }}">Preguntas</a></li>
+                  <li><a href="#">Contacto</a></li>
+              </ul>
+          </nav>
+      </div>
+
+  </header>
+
+      @yield('content')
+
+  </div>
+    <footer>
+              <nav class="footer-terms">
+                <ul>
+                  <li><a href="#">Términos y Condiciones</a></li>
+                  <li><a href="#">Políticas de privacidad</a></li>
+                  <li><a href="#">Políticas de cookies</a></li>
+                </ul>
+              </nav>
+            <span class="footer-bottom"><p>© 2017 | ComCom Todos los derechos reservados</p></span>
+          </footer>
+
+
+
+          <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        	<script>
+        		$('.toggle-cat').click(function() {
+        			$('.cat ul').slideToggle('medium')
+        		})
+        	</script>
+
+          <script language="javascript">
+          function toggleState(item){
+               if(item.className == "ion-toggle") {
+                   document.getElementById("cssArchivo").href="css/styles.css";
+                      item.className="ion-toggle-filled";
+               } else {
+             document.getElementById("cssArchivo").href="css/stylesOscuro.css";
+             item.className="ion-toggle";
+               }
+          }
+          </script>
+
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>

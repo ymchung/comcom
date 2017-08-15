@@ -1,6 +1,6 @@
-@extends('admin.panel')
+@extends('layouts.app')
 
-@section('subcontent-admin')
+@section('content')
   <div class="col-md-9">
     <div class="panel panel-default">
       <div class="panel-heading"> PRODUCTOS
