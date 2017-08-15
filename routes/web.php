@@ -18,10 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/myaccount', 'HomeController@index')->name('myaccount');
-
-Route::get('/products' , 'SitesController@products')->name('products');
-
-    Route::post('/products/create', 'ProductController@store');
+Route::get('/products', 'SitesController@products')->name('products');
+// Route::post('/products/create', 'ProductController@store');
 
 Route::group(['prefix' => 'admin'], function(){
   Route::group(['middleware'=>'role:admin'], function() {
@@ -29,5 +27,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::resource('/users', 'UserController');
     Route::resource('/products', 'ProductController');
     Route::post('/products/create', 'ProductController@store');
+    Route::put('/products/{id}', 'ProductController@update');
+    Route::get('/products/{id}/delete', 'ProductController@destroy');
   });
 });

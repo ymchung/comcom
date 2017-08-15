@@ -10,9 +10,10 @@
 
                 <div class="panel-body">
 
-                  <form action="/admin/products" method="POST">
+                  <form action="/admin/products/{{$product->id}}" enctype="multipart/form-data" method="POST">
                     {{ csrf_field() }}
                     {{ method_field('PATCH') }}
+
 
                     <label for="">Titulo</label>
                     <input type="text" name="title" value="{{ old('title', $product->title) }}"><br>
@@ -26,7 +27,7 @@
                     </select>
 
                     <label for="">Descripción</label>
-                    <textarea type="text" name="description" value="{{ old('description', $product->description) }}"></textarea><br>
+                    <input type="text" name="description" value="{{ old('description', $product->description) }}"></input><br>
 
                     <label for="">Precio original</label>
                     <input type="text" name="originalprice" value="{{ old('originalprice', $product->originalprice) }}"><br>
@@ -40,7 +41,9 @@
                     <label for="">Fecha de finalización</label>
                     <input type="date" name="duration" value="{{ old('duration', $product->duration) }}"><br>
 
-                    <label for="">Imagen</label><br>
+                    <label for="">Imagen </label>
+                    <input type="file" name="image" value=""><br>
+
 
                     <button class="btn btn-sm btn-primary" type="submit" name="" value="">Actualizar</button>
 

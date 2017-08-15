@@ -22,13 +22,13 @@
           <tbody>
             @forelse($products as $product)
               <tr>
-                <td><img width="60px" src="{{ $product->image }}"></td>
+                <td><img width="60px" src="{{ Storage::disk('local')->url($product->image)}}"></td>
                 <td><a href="{{ route('products.show', $product) }}">{{ $product->title }}</a></td>
                 <td>{{ $product->category->name }}</td>
                 <td>{{ $product->priceText() . $product->comcomprice }}</td>
                 <td>
                   <a class="btn btn-xs btn-success" href="{{ route('products.edit', $product) }}">Editar</a>
-                  <a class="btn btn-xs btn-danger" href="{{ route('products.edit', $product) }}">Borrar</a>
+                  <a class="btn btn-xs btn-success" href="{{ url('admin/products/'.$product->id.'/delete') }}">Borrar</a>
                 </td>
               <tr>
             @empty

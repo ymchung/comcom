@@ -10,7 +10,7 @@
 
                 <div class="panel-body">
 
-                  <form action="/admin/products" method="POST">
+                  <form action="/admin/products/create" enctype="multipart/form-data" method="POST">
                     {{ csrf_field() }}
                     {{ method_field('POST') }}
 
@@ -26,7 +26,7 @@
                     </select>
 
                     <label for="">Descripción</label>
-                    <textarea type="text" name="description" value=""></textarea><br>
+                    <input type="text" name="description" value=""></input><br>
 
                     <label for="">Precio original</label>
                     <input type="text" name="originalprice" value=""><br>
@@ -40,8 +40,9 @@
                     <label for="">Fecha de finalización</label>
                     <input type="date" name="duration" value=""><br>
 
-                    <label for="">Imagen</label>
-                    <input type="file" name="image" value=""> <br>
+                    <label for="">Imagen </label>
+                    <input type="file" name="image" value="">
+                     <br>
 
                     <button class="btn btn-sm btn-primary" type="submit" name="" value="">Publicar</button>
 

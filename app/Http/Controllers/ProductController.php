@@ -41,9 +41,24 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductCreateRequest $request)
+    public function store(Request $request)
     {
-      \Auth::user()->products()->create($request->all());
+      $file = $request->file('image');
+      $ext = $file->extension();
+      $name = uniqid();
+      $path = $file->storeAs('products'.$request->id, $name.'.'.$ext);
+
+      $upload = [
+        'title' => $request->input('title'),
+        'description' => $request->input('description'),
+        'category_id' => $request->input('category_id'),
+        'originalprice' => $request->input('originalprice'),
+        'comcomprice' => $request->input('comcomprice'),
+        'minimumreservation' => $request->input('minimumreservation'),
+        'duration' => $request->input('duration'),
+        'image' => $path
+      ];
+      \Auth::user()->products()->create($upload);
       return redirect('admin/products');
 
     }
@@ -83,7 +98,25 @@ class ProductController extends Controller
     public function update(ProductCreateRequest $request, $id)
     {
       $product = Product::findOrFail($id);
-      $product->update($request->all());
+
+      $file = $request->file('image');
+      $ext = $file->extension();
+      $name = uniqid();
+      $path = $file->storeAs('products'.$request->id, $name.'.'.$ext);
+
+      $upload = [
+        'title' => $request->input('title'),
+        'description' => $request->input('description'),
+        'category_id' => $request->input('category_id'),
+        'originalprice' => $request->input('originalprice'),
+        'comcomprice' => $request->input('comcomprice'),
+        'minimumreservation' => $request->input('minimumreservation'),
+        'duration' => $request->input('duration'),
+        'image' => $path
+      ];
+
+      $product->update($upload);
+      return redirect('admin/products');
     }
 
     /**
@@ -94,7 +127,14 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+      // $product = Product::findOrFail($id);
+      // $product->destroy();
+      // // Product::destroy($id);
+      // return view('productslist');
+
+      $product = Product::find($id);
+      $product->delete();
+      return redirect('/admin/products');
     }
 
 }
